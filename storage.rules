@@ -1,0 +1,15 @@
+
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow reads and writes for all authenticated users.
+    // This is a common starting point. You can refine these rules
+    // to be more granular based on your app's needs.
+    // For example, you might restrict writes to a specific path
+    // or to a user's own content.
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+  }
+}
